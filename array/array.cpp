@@ -71,7 +71,6 @@ public:
         
         mCur--;
     }
-
     
     // ÔªËØ²éÑ¯
     int find(int val)
