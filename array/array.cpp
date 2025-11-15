@@ -56,6 +56,7 @@ public:
         mpArr[pos] = val;
         mCur++;
     }
+    
     // °´Î»ÖÃÉ¾³ý
     void erase(int pos)
     {
