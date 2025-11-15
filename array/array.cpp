@@ -5,8 +5,129 @@
 using namespace std;
 
 
+// 移除元素，
+int RemoveElement(int arr[], int val)
+{
+    int* p = arr;
+    int* q = arr + 10 - 1;
+
+    while (p <= q)
+    {
+        
+        if (*q == val)
+        {
+            q--;
+            continue;
+        }
+
+        if (*p != val)
+        {
+            p++;
+            continue;
+        }
+
+        int temp = *p;
+        *p = *q;
+        *q = temp;
+        q--;
+        p++;
+    }
+    return (p-arr);
+}
+
+int main()
+{
+    srand(time(0));
+    int arr[10] = {0};
+    for (int i = 0; i < sizeof(arr)/sizeof(int); i++)
+    {
+        arr[i] = rand()%10;
+    }
+    
+    for (int v : arr)
+    {
+        cout << v << " ";
+    }
+    cout << endl;
+
+    int len = RemoveElement(arr, 2);
+    cout << "len = ";
+    cout << len << endl;
+
+    for (int i = 0; i < len; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+
+
 
 #if 0
+// 整形数组，把偶数调整到左边，奇数到右边
+void AdjustArray(int arr[], int size)
+{
+    int* p = arr;              // front pointer
+    int* q = arr + size - 1;   // back pointer
+
+    while (p < q)
+    {
+        // if ((*p & 0x1) == 0) // 偶数
+        // {
+        //     p++;
+        //     continue;
+        // }
+        while (p < q)
+        {
+            if ((*p & 0x1) == 1)
+            {
+                break;
+            }
+            p++;
+        }
+        
+        
+        if ((*q & 0x1) == 1) // 奇数
+        {
+            q--;
+            continue;
+        }
+        
+        int temp = *p;
+        *p = *q;
+        *q = temp;
+
+        p++;
+        q--;
+    }
+    
+}
+
+int main()
+{
+    int arr[10] = {0};
+    srand(time(0));
+    for (int i = 0; i < 10; i++)
+    {
+        arr[i] = rand() % 100;
+    }
+
+    for (int v : arr)
+    {
+        cout << v << " ";
+    }
+    cout << endl;
+    
+    AdjustArray(arr, sizeof(arr)/sizeof(int));
+    for (int v : arr)
+    {
+        cout << v << " ";
+    }
+    cout << endl;
+}
+
+
 // 逆序字符串，双指针（一前一后）
 void Reverse(char arr[], int size)
 {
