@@ -1,7 +1,34 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 using namespace std;
+
+
+
+#if 0
+// 逆序字符串，双指针（一前一后）
+void Reverse(char arr[], int size)
+{
+    char* p = arr;              // front pointer
+    char* q = arr + size - 1;   // back pointer
+
+    while (p < q)
+    {
+        char ch = *p;
+        *p = *q;
+        *q = ch;
+        p++;
+        q--;
+    }
+}
+
+int main()
+{
+    char arr[] = "hello world";
+    Reverse(arr, strlen(arr));
+    cout << arr << endl;
+}
 
 class Array
 {
@@ -139,3 +166,4 @@ int main()
     }
     
 }
+#endif
