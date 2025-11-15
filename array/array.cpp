@@ -20,16 +20,11 @@ int RemoveElement(int arr[], int val)
             continue;
         }
 
-        if (*p != val)
+        if (*p == val)
         {
-            p++;
-            continue;
+            *p = *q;
+            q--;
         }
-
-        int temp = *p;
-        *p = *q;
-        *q = temp;
-        q--;
         p++;
     }
     return (p-arr);
