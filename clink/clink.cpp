@@ -131,6 +131,6 @@ int main()
     
     link.show();
 
-    link.Remove(2);
+    link.RemoveAll(2);
     link.show();
 }
