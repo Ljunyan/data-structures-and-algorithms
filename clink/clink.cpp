@@ -26,7 +26,14 @@ public:
     }
     ~Clink()
     {
+        Node* p = head_;
         // 节点的释放
+        while (p != nullptr)
+        {
+            delete []p;
+            head_ = head_->next_;
+            p = head_;
+        }
     }
 
     // 链表的尾插法
@@ -54,6 +61,46 @@ public:
         head_->next_ = node;
     }
 
+    //链表节点的删除
+    void RemoveAll(int val)
+    {
+        Node* slow = head_;
+        Node* fast = head_->next_;
+
+        if (fast == nullptr)
+        {
+            return;
+        }
+        // 要用delet释放内存
+        while (slow->next_ != nullptr)
+        {
+            if (fast->data_ == val)
+            {
+                fast = fast->next_;
+                slow->next_ = fast;
+                continue;
+            }
+            slow = fast;
+            fast = fast->next_;
+        }
+        
+    }
+
+    // 搜索 O(n)
+    bool Find(int val)
+    {
+        Node* p = head_->next_;
+        while (p != nullptr)
+        {
+            if (p->data_ == val)
+            {
+                return 1;
+            }
+            p = p->next_;
+        }
+        return 0;
+    }
+
     // 链表打印
     void show()
     {
@@ -63,6 +110,7 @@ public:
             cout << p->data_ << " ";
             p = p->next_;
         }
+        cout << endl;
     }
 };
 
@@ -73,13 +121,16 @@ int main()
     Clink link;
     srand(time(0));
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 20; i++)
     {
-        int val = rand() % 100;
+        int val = rand() % 10;
         cout << val << " ";
         link.InsertTail(val);
     }
     cout << endl; 
     
+    link.show();
+
+    link.Remove(2);
     link.show();
 }
