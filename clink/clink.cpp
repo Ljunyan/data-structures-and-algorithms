@@ -18,6 +18,7 @@ private:
     Node* head_;
 
     friend void ReverseLink(Clink &link);
+    friend bool GetLastKNode(Clink &link, int k);
 public:
     Clink()
     {
@@ -133,8 +134,28 @@ void ReverseLink(Clink &link)
         q->next_ = link.head_->next_;
         link.head_->next_ = q;
     }
-    q = nullptr;
-    p = nullptr;
+}
+
+// 获取倒数第 k 个节点的值
+bool GetLastKNode(Clink &link, int k)
+{
+    Node* fast = link.head_;
+    Node* slow = fast;
+    for (int i = 0; i < k; i++)
+    {
+        fast = fast->next_; 
+        if (fast == nullptr)
+        {
+            return false;
+        }
+    }
+    
+    while (fast != nullptr)
+    {
+        fast = fast->next_;
+        slow = slow->next_;
+    }
+    return true;
 }
 
 int main()
@@ -153,6 +174,11 @@ int main()
 
     ReverseLink(link);
     link.show();
+
+    if(GetLastKNode(link, 6))
+    {
+        cout << "true" << endl;
+    }
 }
 
 
