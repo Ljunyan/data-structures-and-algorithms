@@ -17,7 +17,7 @@ class Clink
 private:
     Node* head_;
 
-    
+    friend void ReverseLink(Clink &link);
 public:
     Clink()
     {
@@ -114,8 +114,49 @@ public:
     }
 };
 
+// µ¥Á´±íÄæÐò
+void ReverseLink(Clink &link)
+{
+    Node* p = link.head_->next_;
+    if (p == nullptr)
+    {
+        return;
+    }
+    
+    link.head_->next_ = nullptr;
+
+    Node* q;
+    while (p != nullptr)
+    {
+        q = p;
+        p = p->next_;
+        q->next_ = link.head_->next_;
+        link.head_->next_ = q;
+    }
+    q = nullptr;
+    p = nullptr;
+}
+
+int main()
+{
+    Clink link;
+    srand(time(0));
+
+    for (int i = 0; i < 5; i++)
+    {
+        int val = rand() % 10;
+        cout << val << " ";
+        link.InsertTail(val);
+    }
+    cout << endl; 
+    link.show();
+
+    ReverseLink(link);
+    link.show();
+}
 
 
+#if 0
 int main()
 {
     Clink link;
@@ -134,3 +175,4 @@ int main()
     link.RemoveAll(2);
     link.show();
 }
+#endif
