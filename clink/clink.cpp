@@ -19,6 +19,7 @@ private:
 
     friend void ReverseLink(Clink &link);
     friend bool GetLastKNode(Clink &link, int k);
+    friend void MergeLink(Clink &link1, Clink &link2);
 public:
     Clink()
     {
@@ -158,6 +159,66 @@ bool GetLastKNode(Clink &link, int k)
     return true;
 }
 
+// 合并两个有序的单链表
+void MergeLink(Clink &link1, Clink &link2)
+{
+    
+    Node* last = link1.head_;
+    Node* p = link1.head_->next_;
+    Node* q = link2.head_->next_;
+    q->next_ = nullptr;
+
+    while (q != nullptr && p != nullptr)
+    {
+        if (q->data_ <= p->data_)
+        {
+            last->next_ = q;
+            q = q->next_;
+            last = last->next_;
+        }
+        else if(q->data_ > p->data_)
+        {
+            last->next_ = p;
+            p = p->next_;
+            last = last->next_;
+        }
+    }
+
+    if (p == nullptr)
+    {
+        last->next_ = q;
+    }
+    else if(q == nullptr)
+    {
+        last->next_ = p;
+    }
+    
+}
+
+int main()
+{
+    int arr[] = {25, 37, 52, 78, 88, 92, 98, 108};
+    int brr[] = {13, 23, 56, 62, 77, 109};
+
+    Clink link1, link2;
+
+    for (int v : arr)
+    {
+        link1.InsertTail(v);
+    }
+    for (int v : brr)
+    {
+        link2.InsertTail(v);
+    }
+    
+    link1.show();
+    link2.show();
+    
+    MergeLink(link1, link2);
+    link1.show();
+}
+
+#if 0
 int main()
 {
     Clink link;
@@ -182,7 +243,7 @@ int main()
 }
 
 
-#if 0
+
 int main()
 {
     Clink link;
