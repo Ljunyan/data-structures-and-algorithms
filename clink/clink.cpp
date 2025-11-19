@@ -195,6 +195,55 @@ void MergeLink(Clink &link1, Clink &link2)
     
 }
 
+// 判断单链表是否有环，存在的找到环的入口
+bool IsLinkHasCircle(Node* head, int &val)
+{
+    //  定义快慢指针
+    Node* fast = head;
+    Node* slow = head;
+
+    while (fast != nullptr && fast->next_ != nullptr)
+    {
+        slow = slow->next_;
+        fast = fast->next_->next_;
+
+        if (slow == fast)
+        {
+            // 快慢指针再次遇见，链表存在环
+            fast = head;
+            while (fast != slow)
+            {
+                slow = slow->next_;
+                fast = fast->next_;
+            }
+            val = slow->data_;
+            return true;
+        }
+        
+    }
+    return false;
+}
+
+int main()
+{
+    Node head;
+    Node n1(25), n2(67), n3(32), n4(18);
+    head.next_ = &n1;
+    n1.next_ = &n2;
+    n2.next_ = &n3;
+    n3.next_ = &n4;
+    n4.next_ = &n2;
+
+    int val;
+    if(IsLinkHasCircle(&head, val))
+    {
+        cout << "链表存在环，入口节点是：" << val << endl;
+    }
+    
+}
+
+
+#if 0
 int main()
 {
     int arr[] = {25, 37, 52, 78, 88, 92, 98, 108};
@@ -218,7 +267,7 @@ int main()
     link1.show();
 }
 
-#if 0
+
 int main()
 {
     Clink link;
