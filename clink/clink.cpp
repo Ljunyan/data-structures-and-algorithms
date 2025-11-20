@@ -224,6 +224,78 @@ bool IsLinkHasCircle(Node* head, int &val)
     return false;
 }
 
+// 判断两个单链表是否相交，如果相交，返回相交节点的值
+bool IsLinkHasMerge(Node* head1, Node* head2, int &val)
+{
+    int i=0, j=0;
+    Node* p = head1;
+    Node* q = head2;
+    while (p != nullptr)
+    {
+        p = p->next_;
+        i++;
+    }
+    while (q != nullptr)
+    {
+        q = q->next_;
+        j++;
+    }
+
+    p = head1;
+    q = head2;
+    if (i >= j)
+    {
+        for (int k = 0; k < i-j; k++)
+        {
+            p = p->next_;
+        }
+    }
+    else
+    {
+        for (int k = 0; k < j-i; k++)
+        {
+            q = q->next_;
+        }
+    }
+
+    
+    while (p != nullptr && q != nullptr)
+    {
+        if (p == q)
+        {
+            val = p->data_;
+            return true;
+        }
+        p = p->next_;
+        q = q->next_;
+    }
+    return false;
+}
+
+int main()
+{
+    Node head1, head2;
+    Node a1(5), a2(60), a3(40), a4(8);
+    Node b1(50), b2(5);
+
+    head1.next_ = &a1;
+    a1.next_ = &a2;
+    a2.next_ = &a3;
+    a3.next_ = &a4;
+
+    head2.next_ = &b1;
+    b1.next_ = &b2;
+    b2.next_ = &a2;
+
+    int val;
+    if(IsLinkHasMerge(&head1, &head2, val))
+    {
+        cout << "相交节点的值是" << val << endl;
+    }
+
+}
+
+#if 0
 int main()
 {
     Node head;
@@ -243,7 +315,6 @@ int main()
 }
 
 
-#if 0
 int main()
 {
     int arr[] = {25, 37, 52, 78, 88, 92, 98, 108};
