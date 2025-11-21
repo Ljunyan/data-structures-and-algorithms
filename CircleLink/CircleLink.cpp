@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stdio.h>
+#include <time.h>
 using namespace std;
 
 class CircleLink
@@ -52,11 +54,76 @@ public:
         {
             tail_ = n;
         }
-        
+    }
+
+    // É¾³ý
+    bool Remove(int val)
+    {
+        Node* p = head_;
+        Node* q = head_->next_;
+
+        while (q != head_)
+        {
+            if (q->data_ == val)
+            {
+                p->next_ = q->next_;
+                delete q;
+                if (p->next_ == head_)
+                {
+                    tail_ = p;
+                }
+                return true;
+            }
+            q = q->next_;
+            p = p->next_;
+        }
+        return false;
+    }
+
+    // ²éÑ¯
+    bool find(int val)
+    {
+        Node* p = head_->next_;
+        while (p != head_)
+        {
+            if (p->data_ == val)
+            {
+                return true;
+            }
+            p = p->next_;
+        }
+        return false;
+    }
+
+    void show() const
+    {
+        Node* p = head_->next_;
+        while (p != head_)
+        {
+            cout << p->data_ << " ";
+            p = p->next_;
+        }
+        cout << endl;
     }
 };
 
 int main()
 {
-
+    CircleLink C;
+    srand(time(0));
+    C.InsertHead(1);
+    for (int i = 0; i < 10; i++)
+    {
+        C.InsertTail(rand() % 10);
+    }
+    C.show();
+    if(C.find(1))
+    {
+        cout << "successful" << endl;
+        // C.show();
+    }
+    else
+    {
+        cout << "fail" << endl;
+    }
 }
