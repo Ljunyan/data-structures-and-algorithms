@@ -81,7 +81,7 @@ public:
     }
 
     // ²éÑ¯
-    bool find(int val)
+    bool Find(int val)
     {
         Node* p = head_->next_;
         while (p != head_)
@@ -95,7 +95,7 @@ public:
         return false;
     }
 
-    void show() const
+    void Show() const
     {
         Node* p = head_->next_;
         while (p != head_)
@@ -116,8 +116,8 @@ int main()
     {
         C.InsertTail(rand() % 10);
     }
-    C.show();
-    if(C.find(1))
+    C.Show();
+    if(C.Find(1))
     {
         cout << "successful" << endl;
         // C.show();
